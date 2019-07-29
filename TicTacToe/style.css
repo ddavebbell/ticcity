@@ -1,0 +1,54 @@
+html,
+body {
+	height: 100%;
+	font-family: 'Open Sans', sans-serif;
+	background: radial-gradient(#aaaaaa, #7684ad);
+}
+
+.title {
+	font-size: 2em;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	text-align: center;
+	text-transform: uppercase;
+	color: white;
+	padding: 10px;
+}
+
+.flex-container {
+	display: flex;
+}
+
+.flex-column {
+	flex-direction: column;
+}
+
+.flex-wrap {
+	flex-wrap: wrap;
+	position: absolute;
+	padding: 60px;
+}
+
+.flex-center {
+	justify-content: center;
+	align-items: center;
+}
+
+.board-container {
+	height: 100%;
+	width: 100%;
+}
+
+.board {
+	width: 630px;
+}
+
+.square {
+	width: 190px;
+	height: 190px;
+	margin: 5px;
+	border-top: 3px;
+	border-bottom: 3px;
+	border: thick solid #EEEEEE;
+}
