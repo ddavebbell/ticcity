@@ -1,56 +1,43 @@
-$(document).ready(function(){
+$(document).ready(function() {
+	const square = $(".square");
+	const player1 = "x";
+	const player2 = "o";
 
 	let currentTurn = 1;
 	let movesMade = 0;
-	let square = $(".square");
-	let player1 = "x";
-	let player2 = "o";
 
-	square.on('mouseover', function(event){
-
-		if (currentTurn === 1) {
-			if (!(event.target.style.backgroundImage)) {
-				$(".square:hover").css({"background-image": "url(wizard.jpg)"});
-			}
-		} else if (currentTurn != 1) {
-			if (!(event.target.style.backgroundImage === null)) {
-				$(".square:hover").css({"background-image": "url(hotdog.jpg)"})
-			}
-		} else if (event.target.style.backgroundImage) {
-				null
+	square.on('mouseover', function(event) {
+		if (isEven(currentTurn) && !event.target.style.backgroundImage) {
+			$(".square:hover").css({"background-image": "url(wizard.jpg)"});
+		} else if (isOdd(currentTurn) && !event.target.style.backgroundImage) {
+			$(".square:hover").css({"background-image": "url(hotdog.jpg)"});
 		}
 	});
 
 	square.on('mouseout', function(event){
-		if (currentTurn === 1) {
-			if (event.target.style.backgroundImage) {
-				event.target.style.backgroundImage = null;
-			}
-		} else if (currentTurn != 1) {
-			if (event.target.style.backgroundImage) {
-				event.target.style.backgroundImage = null;
-			}
-		} else if (event.target.style.backgroundImage) {
-				null
+		if (event.target.getAttribute('data-status') != 'in-use') {
+			event.target.style.backgroundImage = null;
 		}
 	});
 
-	square.on('click', function(event){
+	square.on('click', function(event) {
 		movesMade++;
-console.log(movesMade)
-		if (currentTurn === 1) {
-			if (!(event.target.style.backgroundImage)) {
-				event.target.style.backgroundImage = 'wizard.jpg';
-				currentTurn++;
-				console.lkog
-			}
-		} else if (currentTurn != 1) {
-			if (!(event.target.style.backgroundImage)) {
-				console.log(event.target.style.backgroundImage = './hotdog.jpg')
-				event.target.style.backgroundImage = './hotdog.jpg';
-				currentTurn--;
-			}
+		if (isEven(currentTurn)) {
+			event.target.style.backgroundImage = "url('./wizard.jpg')"
+			event.target.setAttribute('data-status', 'in-use');
+			currentTurn++;
+		} else if (isOdd(currentTurn)) {
+			event.target.style.backgroundImage = "url('./hotdog.jpg')"
+			event.target.setAttribute('data-status', 'in-use');
+			currentTurn--;
 		}
 	});
 
+	function isEven(n) {
+  	return n % 2 == 0;
+	}
+
+	function isOdd(n) {
+	  return Math.abs(n % 2) == 1;
+	}
 });
